@@ -17,5 +17,5 @@ link:
 	ld -Ttext 0x7E00 $(LDFLAGS) -o kernel.bin $(SOURCES)
 
 .s.o:
-	as --32 boot.s -o boot.o
-	as $< -o $@
+	as -32 boot.s -o boot.o
+	as -32 $< -o $@
