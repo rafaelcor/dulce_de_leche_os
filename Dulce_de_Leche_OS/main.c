@@ -12,6 +12,7 @@ int main(){
  asm volatile ("sti");
  timer_install();
  keyboard_install();
+ monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\t\b\b\t\t\b|  Welcome to Dulce de Leche OS   |\n");
  monitor_write("\t\b\b\t\t---------------------------------\n");

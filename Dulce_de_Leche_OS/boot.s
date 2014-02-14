@@ -6,7 +6,6 @@
 _start:
  mov $bootmesg, %si
  call message
- jmp .
 
  mov $0x80, %dl # Drive 0x80 = hard disk 1
  mov $0x00, %dh # Head (0=base)
