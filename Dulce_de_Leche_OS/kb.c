@@ -1,12 +1,13 @@
 #include "kb.h"
-
+int cont = 0;
+char strtop[1000];//2 13
 /* US KeyBoard */
 unsigned char kbdus[128] = {
  0,  27, '1', '2', '3', '4', '5', '6', '7', '8',	/* 9 */
   '9', '0', '-', '=', '\b',	/* Backspace */
   '\t',			/* Tab */
-  'q', 'w', 'e', 'r',	/* 19 */
-  't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n',	/* Enter key */
+  'q', 'w', 'e', 'r',	/* 19 */ //de 16
+  't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n',	/* Enter key */ //a 27
     0,			/* 29   - Control */
   'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',	/* 39 */
  '\'', '`',   0,		/* Left shift */
@@ -43,7 +44,9 @@ unsigned char kbdus[128] = {
 /* Handles the keyboard interrupt */
 void keyboard_handler(regs *r){
  u8int scancode;
-
+ char test[100];
+ cont = 0;
+ memset(strtop,'\0', 100);
  /* Read from the keyboard's data buffer */
  scancode = inb(0x60);
 
@@ -53,14 +56,31 @@ void keyboard_handler(regs *r){
   /* You can use this one to see if the user released the
   *  shift, alt, or control keys... */
  }
- else{
   /* Here, a key was just pressed. Please note that if you
   *  hold a key down, you will get repeated key press
   *  interrupts. */
-
-  monitor_put(kbdus[scancode]);
+  if (scancode == 28){
+	  monitor_write("\n");
+	  monitor_write("user>>>");
+	  if (strtop == "clear"){
+		   //monitor_write("\ntest\n");
+		   monitor_clear();
+		  }
+	  monitor_write(strtop);
+	  //strtop[] = "";
+	  cont = 0;
+	  //borrar todo su contenido
+	  memset(strtop,'\0', 100);
+  }
+  else{
+	  if ( (scancode >=2) && (scancode <= 13) || (scancode >= 16) && (scancode <= 27) || (scancode >= 30) && (scancode <= 41) || (scancode >= 44) && (scancode <= 53) || scancode == 55 || scancode == 74 || scancode == 78){
+		  strtop[cont] = kbdus[scancode];
+		  cont++;
+	  }
+  //monitor_write("\v");
+  monitor_put(kbdus[scancode]);}
+  
  }
-}
 
 void keyboard_install(){
  irq_install_handler(1, keyboard_handler);
