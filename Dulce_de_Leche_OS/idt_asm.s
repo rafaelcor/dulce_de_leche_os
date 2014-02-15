@@ -432,4 +432,5 @@ irq_common_stub:
  pop %ds
  popa
  add $0x08, %esp
+ sti
  iret

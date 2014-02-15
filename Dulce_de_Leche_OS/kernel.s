@@ -30,7 +30,7 @@ data_gdt: # Data descriptor 4Gb flat seg at 0000:0000h
  .word 0x0000 # Base 0000:0000h
  .byte 0x00 # Descriptor format same as above
  .byte 0x92
- .byte 0x0cf
+ .byte 0xCF
  .byte 0x00
 
 .equ videosel, .-gdt # ie 18h,next gdt entry
@@ -72,8 +72,10 @@ init:
 go_pm:
  mov $_stack, %esp
  mov $datasel, %ax
- mov %ax, %ds # Initialise ds & es to data segment
+ mov %ax, %ds
  mov %ax, %es
+ mov %ax, %fs
+ mov %ax, %gs
  cmp $0x00, %bx
  je enable_A20
  call main

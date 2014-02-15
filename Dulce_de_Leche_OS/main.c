@@ -73,6 +73,7 @@ int main(){
  monitor_write("\n");
  monitor_write("\n");
  monitor_clear();
+ timer_wait(500);
 
  monitor_write("Inicializando el teclado\n");
  keyboard_install();
