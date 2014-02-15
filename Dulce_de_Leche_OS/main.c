@@ -6,11 +6,15 @@
 #include "kb.h"
 
 int main(){
+ monitor_clear();
+ monitor_write("Inicializando la IDT\n");
  idt_install();
+ monitor_write("Inicializando las ISR\n");
  isrs_install();
+ monitor_write("Inicializando las IRQ\n");
  irq_install();
- //keyboard_install();
  asm volatile ("sti");
+ monitor_write("Inicializando el PIT\n");
  timer_install();
  
  monitor_clear();
@@ -69,8 +73,12 @@ int main(){
  monitor_write("\n");
  monitor_write("\n");
  monitor_clear();
- monitor_write("user>>>");
+
+ monitor_write("Inicializando el teclado\n");
  keyboard_install();
+ monitor_clear();
+
+ monitor_write("user>>>");
  //monitor_write();
 
  return 0;

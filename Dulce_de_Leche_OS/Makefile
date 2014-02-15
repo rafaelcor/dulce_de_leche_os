@@ -3,9 +3,9 @@ CFLAGS=-m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector
 LDFLAGS=--oformat binary -melf_i386
 
 all: $(SOURCES) link 
-	dd if=/dev/zero of=ddl.img bs=512 count=129
+	dd if=/dev/zero of=ddl.img bs=512 count=65
 	dd if=boot.bin of=ddl.img bs=512 count=1 conv=notrunc
-	dd if=kernel.bin of=ddl.img bs=512 count=128 seek=1 conv=notrunc
+	dd if=kernel.bin of=ddl.img bs=512 count=64 seek=1 conv=notrunc
 	mv *.o *.bin temps
 
 

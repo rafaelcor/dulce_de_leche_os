@@ -42,9 +42,25 @@ data_gdt: # Data descriptor 4Gb flat seg at 0000:0000h
  .byte 0x00
 gdt_end:
 
+message:
+ lodsb
+ or %al, %al
+ jz done
+ mov $0x0E, %ah
+ mov $1, %bl
+ int $0x10
+ jmp message
+
+done:
+ ret
+
+topm: .ascii "Pasando al Modo Protegido...\n\r\0"
+
 init:
  call check_a20
  mov %ax, %bx
+ mov $topm, %si
+ call message
  cli
  lgdt gdtr
  mov %cr0, %eax
@@ -54,6 +70,7 @@ init:
 
 .code32
 go_pm:
+ mov $_stack, %esp
  mov $datasel, %ax
  mov %ax, %ds # Initialise ds & es to data segment
  mov %ax, %es
@@ -167,3 +184,7 @@ a20wait2:
  test $0x01, %al
  jz a20wait2
  ret
+
+stack:
+ .org .+4096
+_stack:
