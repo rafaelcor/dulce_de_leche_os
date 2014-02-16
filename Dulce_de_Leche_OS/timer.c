@@ -3,7 +3,6 @@
 /* This will keep track of how many ticks that the system
 *  has been running for */
 int timer_ticks = 0;
-char light = 0;
 
 void timer_phase(int hz){
  int divisor = 1193180/hz;       /* Calculate our divisor */
