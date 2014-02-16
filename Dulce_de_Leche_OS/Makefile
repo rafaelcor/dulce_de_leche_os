@@ -1,4 +1,4 @@
-SOURCES=kernel.o main.o common.o monitor.o idt.o idt_asm.o isr.o irq.o timer.o kb.o
+SOURCES=kernel.o main.o common.o monitor.o idt.o idt_asm.o isr.o irq.o timer.o kb.o string.o
 CFLAGS=-m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector
 LDFLAGS=--oformat binary -melf_i386
 

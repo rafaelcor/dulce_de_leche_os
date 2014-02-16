@@ -1,6 +1,9 @@
 #include "kb.h"
+#include "string.h"
+
 int cont = 0;
 char strtop[1000];//2 13
+
 /* US KeyBoard */
 unsigned char kbdus[128] = {
  0,  27, '1', '2', '3', '4', '5', '6', '7', '8',	/* 9 */
@@ -44,9 +47,9 @@ unsigned char kbdus[128] = {
 /* Handles the keyboard interrupt */
 void keyboard_handler(regs *r){
  u8int scancode;
- char test[100];
- cont = 0;
- memset(strtop,'\0', 100);
+ //char test[100];
+ //cont = 0;
+ //memset(strtop,'\0', 100);
  /* Read from the keyboard's data buffer */
  scancode = inb(0x60);
 
@@ -56,32 +59,33 @@ void keyboard_handler(regs *r){
   /* You can use this one to see if the user released the
   *  shift, alt, or control keys... */
  }
-  /* Here, a key was just pressed. Please note that if you
-  *  hold a key down, you will get repeated key press
-  *  interrupts. */
-  if (scancode == 28){
-	  monitor_write("\n");
-	  monitor_write("user>>>");
-	  if (strtop == "clear"){
-		   //monitor_write("\ntest\n");
-		   monitor_clear();
-		  }
-	  monitor_write(strtop);
-	  //strtop[] = "";
-	  cont = 0;
-	  //borrar todo su contenido
-	  memset(strtop,'\0', 100);
+ /* Here, a key was just pressed. Please note that if you
+ *  hold a key down, you will get repeated key press
+ *  interrupts. */
+ if (scancode == 28){
+  monitor_write("\n");
+  if(strcmp(strtop, "clear")){
+   //monitor_write("\ntest\n");
+   monitor_clear();
   }
-  else{
-	  if ( (scancode >=2) && (scancode <= 13) || (scancode >= 16) && (scancode <= 27) || (scancode >= 30) && (scancode <= 41) || (scancode >= 44) && (scancode <= 53) || scancode == 55 || scancode == 74 || scancode == 78){
-		  strtop[cont] = kbdus[scancode];
-		  cont++;
-	  }
-  //monitor_write("\v");
-  monitor_put(kbdus[scancode]);}
-  
+  monitor_write("user>>>");
+  //monitor_write(strtop);
+  //strtop[] = "";
+  cont = 0;
+  //borrar todo su contenido
+  memset(strtop,'\0', 100);
  }
+ else{
+  if (kbdus[scancode]){
+   strtop[cont] = kbdus[scancode];
+   cont++;
+  }
+  //monitor_write("\v");
+  monitor_put(kbdus[scancode]);
+ }
+}
 
 void keyboard_install(){
+ memset(strtop,'\0', 100);
  irq_install_handler(1, keyboard_handler);
 }
