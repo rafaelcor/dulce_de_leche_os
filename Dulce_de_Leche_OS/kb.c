@@ -68,6 +68,9 @@ void keyboard_handler(regs *r){
    //monitor_write("\ntest\n");
    monitor_clear();
   }
+  else{
+	  monitor_write("Command not found\n");
+	  }
   monitor_write("user>>>");
   //monitor_write(strtop);
   //strtop[] = "";
