@@ -3,6 +3,7 @@
 /* This will keep track of how many ticks that the system
 *  has been running for */
 int timer_ticks = 0;
+char light = 0;
 
 void timer_phase(int hz){
  int divisor = 1193180/hz;       /* Calculate our divisor */
@@ -18,9 +19,6 @@ void timer_handler(regs *r){
  /*if (timer_ticks % TICKS == 0){
   monitor_write("Ha pasado un segundo\n");
  }*/
- if(!(inb(0x64)&2)){
-  outb(0xED, timer_ticks%8);
- }
 }
 
 void timer_install(){
