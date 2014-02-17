@@ -10,6 +10,10 @@ _start:
  call message
 
 ReadFloppy:
+ mov $0x00, %ah
+ mov $0x80, %dl
+ int $0x13
+ jc ReadFloppy
  mov $disk, %si
  call message
 
