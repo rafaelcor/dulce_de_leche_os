@@ -80,7 +80,6 @@ int main(){
  monitor_clear();
 
  monitor_write("user>>>");
- //monitor_write();
 
  return 0;
 }

@@ -62,29 +62,28 @@ void keyboard_handler(regs *r){
  /* Here, a key was just pressed. Please note that if you
  *  hold a key down, you will get repeated key press
  *  interrupts. */
- if (scancode == 28){
-  monitor_write("\n");
-  if(strcmp(strtop, "clear")){
-   //monitor_write("\ntest\n");
-   monitor_clear();
+ else{
+  if (scancode == 28){
+   monitor_put('\n');
+   if(strcmp(strtop, "clear")){
+    //monitor_write("\ntest\n");
+    monitor_clear();
+   }
+   else{
+    monitor_write("Command not found\n");
+   }
+   monitor_write("user>>>");
+   //monitor_write(strtop);
+   //strtop[] = "";
+   cont = 0;
+   //borrar todo su contenido
+   memset(strtop,'\0', 100);
   }
   else{
-	  monitor_write("Command not found\n");
-	  }
-  monitor_write("user>>>");
-  //monitor_write(strtop);
-  //strtop[] = "";
-  cont = 0;
-  //borrar todo su contenido
-  memset(strtop,'\0', 100);
- }
- else{
-  if (kbdus[scancode]){
    strtop[cont] = kbdus[scancode];
    cont++;
+   monitor_put(kbdus[scancode]);
   }
-  //monitor_write("\v");
-  monitor_put(kbdus[scancode]);
  }
 }
 
