@@ -10,14 +10,10 @@ _start:
  call message
 
 ReadFloppy:
- mov $0x00, %ah
- mov $0x80, %dl
- int $0x13
- jc ReadFloppy
  mov $disk, %si
  call message
 
- mov $0x80, %dl # Drive 0x80 = hard disk 1
+ mov $0x00, %dl # Drive 0x00 = floppy disk 1
  mov $0x00, %dh # Head (0=base)
  mov $0x00, %ch # Track/cylinder
  mov $0x02, %cl # Sector (1=bootloader, apparently sectors starts counting at 1 instead of 0)
@@ -29,6 +25,9 @@ ReadFloppy:
  int $0x13
 
  jc ReadFloppy # If it went wrong, try again
+
+ mov %ah, %al
+ call hex
 
  mov $tokernel, %si
  call message
@@ -47,9 +46,36 @@ message:
 done:
  ret
 
-bootmesg: .ascii "Sweet esta iniciando...\n\r\0"
+bootmesg: .ascii "Dulce de Leche esta iniciando...\n\r\0"
 disk: .ascii "Cargando el kernel...\n\r\0"
 tokernel: .ascii "Pasando el control al Kernel...\n\r\0"
+
+hex:
+ mov %al, %dl
+
+ and $0xF0, %al
+ shr $4, %al
+ call cifra
+ mov $0x0E, %ah
+ int $0x10
+
+ and $0xF, %dl
+ mov %dl, %al
+ call cifra
+ mov $0x0E, %ah
+ int $0x10
+
+ ret
+
+cifra:
+ cmp $9, %al
+ jg thex
+ add $0x30, %al
+ ret
+
+thex:
+ add $0x37, %al
+ ret
 
 .org 510
 .word 0xAA55

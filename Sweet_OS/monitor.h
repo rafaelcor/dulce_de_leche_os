@@ -16,4 +16,7 @@ void monitor_write_hex(u32int);
 
 void monitor_write_dec(u32int);
 
+//void monitor_write_colored(const char *c, (...), int bg, int fg);
+//void monitor_put_colored(char c, int bg, int fg);
+
 #endif

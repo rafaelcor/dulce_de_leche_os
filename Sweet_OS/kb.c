@@ -69,12 +69,13 @@ void keyboard_handler(regs *r){
     //monitor_write("\ntest\n");
     monitor_clear();
    }
+   else if ( charcmp(strtop[0], "e") &  charcmp(strtop[1], "c") & charcmp(strtop[2], "h") & charcmp(strtop[3], "o") & charcmp(strtop[4], " ")){
+	   monitor_write("%s\n", &strtop[5]);
+	   }
    else{
     monitor_write("Command not found\n");
    }
    monitor_write("user>>>");
-   //monitor_write(strtop);
-   //strtop[] = "";
    cont = 0;
    //borrar todo su contenido
    memset(strtop,'\0', 100);

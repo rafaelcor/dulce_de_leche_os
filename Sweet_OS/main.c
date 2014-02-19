@@ -19,7 +19,7 @@ int main(){
  
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
- monitor_write("\t\b\b\t\t\b|  W to Sweet   |\n");
+ monitor_write("\t\b\b\t\t\b|  W to Sweet                     |\n");
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
@@ -27,7 +27,7 @@ int main(){
  timer_wait(500);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
- monitor_write("\t\b\b\t\t\b|  We to Sweet   |\n");
+ monitor_write("\t\b\b\t\t\b|  We to Sweet                    |\n");
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
@@ -35,7 +35,7 @@ int main(){
  timer_wait(500);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
- monitor_write("\t\b\b\t\t\b|  Wel to Sweet   |\n");
+ monitor_write("\t\b\b\t\t\b|  Wel to Sweet                   |\n");
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
@@ -43,7 +43,7 @@ int main(){
  timer_wait(500);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
- monitor_write("\t\b\b\t\t\b|  Welc to Sweet   |\n");
+ monitor_write("\t\b\b\t\t\b|  Welc to Sweet                  |\n");
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
@@ -51,7 +51,7 @@ int main(){
  timer_wait(500);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
- monitor_write("\t\b\b\t\t\b|  Welco to Sweet   |\n");
+ monitor_write("\t\b\b\t\t\b|  Welco to Sweet                 |\n");
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
@@ -59,7 +59,7 @@ int main(){
  timer_wait(500);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
- monitor_write("\t\b\b\t\t\b|  Welcom to Sweet   |\n");
+ monitor_write("\t\b\b\t\t\b|  Welcom to Sweet                |\n");
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
@@ -67,7 +67,7 @@ int main(){
  timer_wait(500);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
- monitor_write("\t\b\b\t\t\b|  Welcome to Sweet   |\n");
+ monitor_write("\t\b\b\t\t\b|  Welcome to Sweet               |\n");
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
@@ -80,6 +80,7 @@ int main(){
  monitor_clear();
 
  monitor_write("%s>>>", "user");
+ //monitor_write("%c", 'a');
 
  return 0;
 }

@@ -127,6 +127,10 @@ void monitor_write(const char *c, ...){
      monitor_write((char*) *((u32int*) pr));
      pr += 4;
      break;
+    case 'c':
+     monitor_put((char) *((u32int*) pr));
+     pr += 4;
+     break;
     default:
      monitor_put('%');
      monitor_put(c[i]);
@@ -174,3 +178,90 @@ void monitor_write_dec(u32int n){
   i /= 10;
  }
 }
+
+/*void monitor_put_colored(char c, int bg, int fg){
+ // The background colour is black (0), the foreground is white (15).
+ u8int backColour = bg;
+ u8int foreColour = fg;
+
+ // The attribute byte is made up of two nibbles - the lower being the
+ // foreground colour, and the upper the background colour.
+ u8int  attributeByte = (backColour << 4) | (foreColour & 0x0F);
+ // The attribute byte is the top 8 bits of the word we have to send to the
+ // VGA board.
+ u16int attribute = attributeByte << 8;
+ u16int *location;
+
+ // Handle a backspace, by moving the cursor back one space
+ if (c == 0x08 && cursor_x){
+  cursor_x--;
+ }
+
+ // Handle a tab by increasing the cursor's X, but only to a point
+ // where it is divisible by 8.
+ else if (c == 0x09){
+  cursor_x = (cursor_x+8) & ~(8-1);
+ }
+
+ // Handle carriage return
+ else if (c == '\r'){
+  cursor_x = 0;
+ }
+
+ // Handle newline by moving cursor back to left and increasing the row
+ else if (c == '\n'){
+  cursor_x = 0;
+  cursor_y++;
+ }
+ // Handle any other printable character.
+ else if(c >= ' '){
+  location = video_memory + (cursor_y*80 + cursor_x);
+  *location = c | attribute;
+  cursor_x++;
+ }
+
+ // Check if we need to insert a new line because we have reached the end
+ // of the screen.
+ if (cursor_x >= 80){
+  cursor_x = 0;
+  cursor_y ++;
+ }
+
+ // Scroll the screen if needed.
+ scroll();
+ // Move the hardware cursor.
+ move_cursor();
+}
+
+void monitor_write_colored(const char *c, (...), int bg, int fg){
+ void *pr;
+ asm volatile ("movl %%ebp, %0" :: "g" (pr));
+ pr += 12;
+ u32int i = 0;
+ while (c[i]){
+  if(c[i] == '%'){
+   i++;
+   switch(c[i]){
+    case '%':
+     monitor_put_colored('%', bg, fg);
+     break;
+    case 's':
+     monitor_write_colored((char*) *((u32int*) pr), bg, fg);
+     pr += 4;
+     break;
+    case 'c':
+     monitor_put_colored((char) *((u32int*) pr), bg, fg);
+     pr += 4;
+     break;
+    default:
+     monitor_put_colored('%', bg, fg);
+     monitor_put_colored(c[i], bg, fg);
+     break;
+   }
+   i++;
+  }
+  else{
+   monitor_put(c[i++]);
+  }
+ }
+}*/
