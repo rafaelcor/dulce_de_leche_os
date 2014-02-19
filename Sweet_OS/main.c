@@ -79,7 +79,7 @@ int main(){
  keyboard_install();
  monitor_clear();
 
- monitor_write("user>>>");
+ monitor_write("%s>>>", "user");
 
  return 0;
 }

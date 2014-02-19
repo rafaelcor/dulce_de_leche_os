@@ -111,10 +111,32 @@ void monitor_clear(){
 }
 
 // Outputs a null-terminated ASCII string to the monitor.
-void monitor_write(char *c){
- int i = 0;
+void monitor_write(const char *c, ...){
+ void *pr;
+ asm volatile ("movl %%ebp, %0" :: "g" (pr));
+ pr += 12;
+ u32int i = 0;
  while (c[i]){
-  monitor_put(c[i++]);
+  if(c[i] == '%'){
+   i++;
+   switch(c[i]){
+    case '%':
+     monitor_put('%');
+     break;
+    case 's':
+     monitor_write((char*) *((u32int*) pr));
+     pr += 4;
+     break;
+    default:
+     monitor_put('%');
+     monitor_put(c[i]);
+     break;
+   }
+   i++;
+  }
+  else{
+   monitor_put(c[i++]);
+  }
  }
 }
 
