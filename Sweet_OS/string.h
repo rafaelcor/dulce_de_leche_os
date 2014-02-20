@@ -5,7 +5,7 @@
 
 char strcmp(const char *one, const char *two);
 
-char charcmp(char *one, char *two);
+//char charcmp(char *one, char *two);
 
 u32int strlen(const char *string);
 

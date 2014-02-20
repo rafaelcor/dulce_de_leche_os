@@ -11,13 +11,13 @@ _start:
 
 ReadFloppy:
  mov $0x00, %ah
- mov $0x80, %dl
+ mov $0x00, %dl
  int $0x13
  jc ReadFloppy
  mov $disk, %si
  call message
 
- mov $0x80, %dl # Drive 0x80 = hard disk 1
+ mov $0x00, %dl # Drive 0x80 = hard disk 1
  mov $0x00, %dh # Head (0=base)
  mov $0x00, %ch # Track/cylinder
  mov $0x02, %cl # Sector (1=bootloader, apparently sectors starts counting at 1 instead of 0)
