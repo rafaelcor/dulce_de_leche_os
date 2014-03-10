@@ -12,6 +12,15 @@ static void move_cursor(){
  outb(0x3D4, 15);      // Tell the VGA board we are setting the low cursor byte.
  outb(0x3D5, cursorLocation);  // Send the low cursor byte.
 }
+void move_cursor_exp(int movement_factor){
+	u8int cursor_x = 0, cursor_y = 0;
+    u16int *video_memory = (void*) 0xB8000;
+    u16int cursorLocation = cursor_y * 80 + cursor_x + 7 + movement_factor;
+    outb(0x3D4, 14);      // Tell the VGA board we are setting the high cursor byte.
+    outb(0x3D5, cursorLocation >> 8); // Send the high cursor byte.
+    outb(0x3D4, 15);      // Tell the VGA board we are setting the low cursor byte.
+    outb(0x3D5, cursorLocation);  // Send the low cursor byte.
+}
 
 // Scrolls the text on the screen up by one line.
 static void scroll(){
@@ -25,13 +34,13 @@ static void scroll(){
   // back in the buffer by a line
   int i;
   for (i = 0*80; i < 24*80; i++){
- video_memory[i] = video_memory[i+80];
+      video_memory[i] = video_memory[i+80];
   }
 
   // The last line should now be blank. Do this by writing
   // 80 spaces to it.
   for (i = 24*80; i < 25*80; i++){
- video_memory[i] = blank;
+      video_memory[i] = blank;
   }
   // The cursor should now be on the last line.
   cursor_y = 24;
@@ -179,7 +188,7 @@ void monitor_write_dec(u32int n){
  }
 }
 
-/*void monitor_put_colored(char c, int bg, int fg){
+void monitor_put_colored(char c, int bg, int fg){
  // The background colour is black (0), the foreground is white (15).
  u8int backColour = bg;
  u8int foreColour = fg;
@@ -233,7 +242,7 @@ void monitor_write_dec(u32int n){
  move_cursor();
 }
 
-void monitor_write_colored(const char *c, (...), int bg, int fg){
+/*void monitor_write_colored(int bg, int fg, const char *c, ...){
  void *pr;
  asm volatile ("movl %%ebp, %0" :: "g" (pr));
  pr += 12;
@@ -265,3 +274,4 @@ void monitor_write_colored(const char *c, (...), int bg, int fg){
   }
  }
 }*/
+

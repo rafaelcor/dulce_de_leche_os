@@ -3,6 +3,7 @@
 
 #include "common.h"
 
+void move_cursor_exp(int movement_factor);
 // Write a single character out to the screen.
 void monitor_put(char c);
 
@@ -16,7 +17,7 @@ void monitor_write_hex(u32int);
 
 void monitor_write_dec(u32int);
 
-//void monitor_write_colored(const char *c, (...), int bg, int fg);
 //void monitor_put_colored(char c, int bg, int fg);
+//void monitor_write_colored(int bg, int fg, const char *c, ...)
 
 #endif

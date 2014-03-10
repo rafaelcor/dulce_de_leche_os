@@ -4,6 +4,7 @@
 #include "irq.h"
 #include "timer.h"
 #include "kb.h"
+#include "power.c"
 
 int main(){
  monitor_clear();
@@ -24,7 +25,7 @@ int main(){
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
  monitor_write("\n");
- timer_wait(500);
+ timer_wait(320);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\t\b\b\t\t\b|  We to Sweet                    |\n");
@@ -32,7 +33,7 @@ int main(){
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
  monitor_write("\n");
- timer_wait(500);
+ timer_wait(320);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\t\b\b\t\t\b|  Wel to Sweet                   |\n");
@@ -40,7 +41,7 @@ int main(){
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
  monitor_write("\n");
- timer_wait(500);
+ timer_wait(320);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\t\b\b\t\t\b|  Welc to Sweet                  |\n");
@@ -48,7 +49,7 @@ int main(){
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
  monitor_write("\n");
- timer_wait(500);
+ timer_wait(320);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\t\b\b\t\t\b|  Welco to Sweet                 |\n");
@@ -56,7 +57,7 @@ int main(){
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
  monitor_write("\n");
- timer_wait(500);
+ timer_wait(320);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\t\b\b\t\t\b|  Welcom to Sweet                |\n");
@@ -64,7 +65,7 @@ int main(){
  monitor_write("\n"); //You must not use simple comillas
  monitor_write("\n");
  monitor_write("\n");
- timer_wait(500);
+ timer_wait(320);
  monitor_clear();
  monitor_write("\t\b\b\t\t---------------------------------\n");
  monitor_write("\t\b\b\t\t\b|  Welcome to Sweet               |\n");
@@ -73,13 +74,15 @@ int main(){
  monitor_write("\n");
  monitor_write("\n");
  monitor_clear();
- timer_wait(500);
+ timer_wait(320);
 
  monitor_write("Inicializando el teclado\n");
  keyboard_install();
  monitor_clear();
-
+ //monitor_write_colored(2, 6, "test");
+ //monitor_write("ñ");
  monitor_write("%s>>>", "user");
+ //move_cursor_exp();
  //monitor_write("%c", 'a');
 
  return 0;
