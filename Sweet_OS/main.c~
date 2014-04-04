@@ -84,18 +84,9 @@ int main(){
  //monitor_write("ñ");
  monitor_write("%s>>>", "user");
 
- //generate_tone();
- speaker_set(10000);   
- beep(2000,2000);
- speaker_set(10000);   
- beep(2000,2000);
- speaker_set(10000);   
- beep(2000,2000);
- speaker_set(10000);   
- beep(2000,2000);
+ generate_tone();
  //move_cursor_exp();
  //monitor_write("%c", 'a');
- 
-  
+
  return 0;
 }

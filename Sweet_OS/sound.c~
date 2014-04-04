@@ -1,0 +1,18 @@
+void generate_tone(){			
+	asm volatile("pusha");
+	asm volatile("movw %ax, %cx");
+	asm volatile("movb $182, %al");
+	asm volatile("outb %al, $0x43");
+	asm volatile("movw %cx, %ax");		
+	asm volatile("outb %al, $0x42");
+	asm volatile("movb %ah, %al");
+	asm volatile("outb %al, $0x42");
+
+	asm volatile("inb $0x61, %al");			
+	asm volatile("orb $0x3, %al");
+	asm volatile("outb %al, $61h");
+
+	asm volatile("popa");
+	asm volatile("ret");
+	
+}
