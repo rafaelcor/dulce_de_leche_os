@@ -46,7 +46,7 @@ void beep(unsigned int wait_time,unsigned int times )
      unsigned char tempB = (inb(0x61) & 0xFC);
      unsigned int count;
 
-    for(count = 0; count == times; count++) 
+    for(count = 0; count < times; count++) 
     {
          if(tempA != (tempA | 3)) 
          {
